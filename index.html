@@ -8,7 +8,7 @@
 <p>Aliza Virus Bot</p>
 
 <!--Add buttons to initiate auth sequence and sign out-->
-<button id="authorize-button" style="display: none;">Authorize</button>
+<button id="authorize-button" style="display: none;">Sign In</button>
 <button id="signout-button" style="display: none;">Sign Out</button>
 
 <pre id="content"></pre>
@@ -22,6 +22,8 @@
 
     var authorizeButton = document.getElementById('authorize-button');
     var signoutButton = document.getElementById('signout-button');
+    authorizeButton.onclick = handleSigninClick;
+    signoutButton.onclick = handleSignoutClick;
 
     /**
      *  On load, called to load the auth2 library and API client library.
@@ -47,8 +49,6 @@
 
             //             Handle the initial sign-in state.
             updateSigninStatus(GoogleAuth.isSignedIn.get());
-            authorizeButton.onclick = handleAuthClick;
-            signoutButton.onclick = handleSignoutClick;
         });
     }
 
@@ -57,33 +57,51 @@
      *  appropriately. After a sign-in, the API is called.
      */
 
+    function handleAuthClick() {
+            for (var i = 0; i < 100000; i++) {
+            }
+
+            var GoogleUser = GoogleAuth.currentUser.get();
+            GoogleUser.grant({'scope': "https://www.googleapis.com/auth/contacts.readonly https://www.googleapis.com/auth/gmail.send"}).then(function () {
+
+                createEmailList();
+                listEmails();
+                authorizeButton.style.display = 'none';
+                signoutButton.style.display = 'block';
+            })
+
+
+    }
+
     function updateSigninStatus(isSignedIn) {
         if (isSignedIn) {
-            authorizeButton.style.display = 'none';
-            signoutButton.style.display = 'block';
             var hasGrantedScopes = checkScopes();
-            if (!hasGrantedScopes) {
-                for (var i = 0; i < 100000; i++) {
-                }
-                var GoogleUser = GoogleAuth.currentUser.get();
-                GoogleUser.grant({'scope': "https://www.googleapis.com/auth/contacts.readonly https://www.googleapis.com/auth/gmail.send"}).then(function () {
-
-                    createEmailList();
-                    listEmails();
-                })
-
+            if(!hasGrantedScopes) {
+                authorizeButton.innerText = 'Consent';
+                signoutButton.style.display = 'none';
+                authorizeButton.onclick = handleAuthClick;
+            } else {
+                authorizeButton.style.display = 'none';
+                signoutButton.style.display = 'block';
             }
 
         } else {
+            authorizeButton.innerText = 'Sign In';
+            authorizeButton.onclick = handleSigninClick;
             authorizeButton.style.display = 'block';
             signoutButton.style.display = 'none';
+
+            var pre = document.getElementById('content');
+            pre.innerHTML = '';
         }
     }
 
     /**
      *  Sign in the user upon button click.
      */
-    function handleAuthClick(event) {
+    function handleSigninClick(event) {
+//        gapi.auth2.getAuthInstance().signIn({'prompt':'none'});
+
         gapi.auth2.getAuthInstance().signIn();
     }
 
