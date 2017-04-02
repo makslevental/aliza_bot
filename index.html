@@ -98,7 +98,8 @@ div {text-align: center; font-size: 1000%;}
             authorizeButton.onclick = handleSigninClick;
             authorizeButton.style.display = 'block';
             signoutButton.style.display = 'none';
-
+            $("body").css("background-color", "black");
+            $("body").css("color", "white");
             var pre = document.getElementById('content');
             pre.innerHTML = '';
         }
