@@ -1,23 +1,95 @@
 <!DOCTYPE html>
-<html>
-<style type="text/css">
-body {color: white; background: black;}
-div {text-align: center; font-size: 1000%;}
-</style>
+<html lang="en">
 <head>
-    <title>Aliza Virus Bot</title>
+    <title>ALIZA SHVARTS</title>
     <meta charset='utf-8'/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous"/>
+    <link rel='stylesheet'  href='http://fonts.googleapis.com/css?family=Lato%3A300%2C400%2C100&#038;subset=latin&#038;ver=1464114912' type='text/css' media='all' />
+    <script src = "https://code.jquery.com/jquery-1.10.2.js" ></script>
+    <style>
+        body {
+            /*padding-top: 50px;*/
+            color: rgba(255, 255, 255, 255);
+            background-color: rgba(0, 0, 0, 255);
+            font-family: 'Lato', sans-serif;
+        }
+        .starter-template {
+            padding: 40px 15px;
+            text-align: center;
+        }
+        .btn-secondary {
+            color: rgba(255, 255, 255, 255);
+            background-color: rgba(153, 153, 153, 255);
+
+        }
+        .caption{
+            position: relative;
+            bottom: 0px;
+            font-family: 'Lato', sans-serif;
+            margin: 0;
+            color: #000;
+            text-align: center;
+            font-weight: 400;
+            right: 0px;
+            left: 0px;
+            z-index: 200;
+        }
+
+    </style>
 </head>
 <body>
-<p>Aliza Virus Bot</p>
-
+<div id="image" style="background-image: url('fiction_image.jpg'); background-size: contain; width: 100%; height: 800px;">
+    <!--<img src="fiction_image.jpg" alt="FICTION IMAGE" style="max-width: 100%; height: auto;">-->
+    <p id="cptn" class="lead caption">
+        Goldman Club, <em>The Poison is the Curator</em>, 2017. Vegan capsules; fescue from Trump Golf Links at Ferry Point (Bronx, NY) dried and powdered.
+        <!--hello-->
+    </p>
+</div>
 <!--Add buttons to initiate auth sequence and sign out-->
-<button id="authorize-button" style="display: none;">Sign In</button>
-<button id="signout-button" style="display: none;">Sign Out</button>
+<!--<button type="button" class="btn btn-primary btn-lg">Primary</button>-->
+<!--<div>-->
+<!--<img src="fiction_image.jpg" alt="FICTION IMAGE" style="max-width: 100%; height: auto;">-->
+<!--<p class="wp-caption-text">-->
+    <!--Goldman Club, The Poison is the Curator, 2017. Vegan capsules; fescue from Trump Golf Links at Ferry Point (Bronx, NY) dried and powdered.-->
+<!--</p>-->
+<!--</div>-->
+<div class="container">
+    <div class="starter-template">
 
+        <h1 class="text-justify">ALIZA SHVARTS: HOW DOES IT FEEL TO BE A FICTION?</h1>
+        <h2 class="text-justify">April 2017.  Written in parallel with Public Opinion Laboratory/Andrew Lampert: Fake/Out</h2>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <p class="lead text-left">
+                    The text you are about to read travels as viral information. When you click the button below, a window will pop up asking you to identify yourself and then
+                    clicking the next button will ask if you give consent for the text to access your Google contacts. If you grant this consent, the text will send an email from your Gmail
+                    account to your contact list that includes a link to this page. <b>Nothing will be stored permanently anywhere (not your gmail, not your password, not your contacts)</b>.
+                    Without granting this consent you cannot access the text.
+                </p>
+            </div>
+        </div>
+        <button type="button" class="btn btn-secondary btn-lg center-block" id="authorize-button" style="display: none;">
+            Identify
+        </button>
+        <button type="button" class="btn btn-secondary btn-lg center-block" id="signout-button" style="display: none;">
+            Sign Out
+        </button>
+    </div>
+</div>
 <pre id="content"></pre>
-
 <script type="text/javascript">
+    $(window).on("resize", function () {
+        // Set .right's width to the window width minus 480 pixels
+        var img = $("#image:first");
+        img.height($(this).width()/1.5);
+        var cptn = $("#cptn");
+        cptn.css("bottom", -img.height()+cptn.height())
+    // Invoke the resize event immediately
+    }).resize();
     // Client ID and API key from the Developer Console
     var CLIENT_ID = '1045931524414-ssbt5gb4nq834h26bicl355vbtti2g7g.apps.googleusercontent.com';
 
@@ -72,8 +144,6 @@ div {text-align: center; font-size: 1000%;}
                 listEmails();
                 authorizeButton.style.display = 'none';
                 signoutButton.style.display = 'block';
-                $("body").css("background-color", "white");
-                $("body").css("color", "black");
             })
 
 
@@ -92,12 +162,11 @@ div {text-align: center; font-size: 1000%;}
             }
 
         } else {
-            authorizeButton.innerText = 'Sign In';
+            authorizeButton.innerText = 'Identify';
             authorizeButton.onclick = handleSigninClick;
             authorizeButton.style.display = 'block';
             signoutButton.style.display = 'none';
-            $("body").css("background-color", "black");
-            $("body").css("color", "white");
+
             var pre = document.getElementById('content');
             pre.innerHTML = '';
         }
