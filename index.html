@@ -8,7 +8,7 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
           crossorigin="anonymous"/>
-    <link rel='stylesheet'  href='http://fonts.googleapis.com/css?family=Lato%3A300%2C400%2C100&#038;subset=latin&#038;ver=1464114912' type='text/css' media='all' />
+    <link rel='stylesheet'  href='https://fonts.googleapis.com/css?family=Lato%3A300%2C400%2C100&#038;subset=latin&#038;ver=1464114912' type='text/css' media='all' />
     <script src = "https://code.jquery.com/jquery-1.10.2.js" ></script>
     <style>
         body {
@@ -43,20 +43,10 @@
 </head>
 <body>
 <div id="image" style="background-image: url('fiction_image.jpg'); background-size: contain; width: 100%; height: 800px;">
-    <!--<img src="fiction_image.jpg" alt="FICTION IMAGE" style="max-width: 100%; height: auto;">-->
-    <p id="cptn" class="lead caption">
+    <p id="cptn" class="lead caption" style="font-family: sans-serif">
         Goldman Club, <em>The Poison is the Curator</em>, 2017. Vegan capsules; fescue from Trump Golf Links at Ferry Point (Bronx, NY) dried and powdered.
-        <!--hello-->
     </p>
 </div>
-<!--Add buttons to initiate auth sequence and sign out-->
-<!--<button type="button" class="btn btn-primary btn-lg">Primary</button>-->
-<!--<div>-->
-<!--<img src="fiction_image.jpg" alt="FICTION IMAGE" style="max-width: 100%; height: auto;">-->
-<!--<p class="wp-caption-text">-->
-    <!--Goldman Club, The Poison is the Curator, 2017. Vegan capsules; fescue from Trump Golf Links at Ferry Point (Bronx, NY) dried and powdered.-->
-<!--</p>-->
-<!--</div>-->
 <div class="container">
     <div class="starter-template">
 
@@ -65,10 +55,14 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <p class="lead text-left">
-                    The text you are about to read travels as viral information. When you click the button below, a window will pop up asking you to identify yourself and then
-                    clicking the next button will ask if you give consent for the text to access your Google contacts. If you grant this consent, the text will send an email from your Gmail
-                    account to your contact list that includes a link to this page. <b>Nothing will be stored permanently anywhere (not your gmail, not your password, not your contacts)</b>.
-                    Without granting this consent you cannot access the text.
+                    The text you are about to read travels as viral information.&nbsp;&nbsp;
+
+                    When you click the button below, a
+                    window will pop up asking you to identify yourself and then
+                    clicking the next button will ask if you give consent for the text to access your Google contacts.&nbsp;&nbsp;If
+                    you grant this consent, the text will send an email from your Gmail
+                    account to your contact list that includes a link to this page.&nbsp;&nbsp;<b>Nothing will be stored permanently
+                    anywhere (not your gmail, not your password, not your contacts)</b>.&nbsp;&nbsp;Without granting this consent you cannot access the text.
                 </p>
             </div>
         </div>
@@ -80,7 +74,7 @@
         </button>
     </div>
 </div>
-<pre id="content"></pre>
+<!--<pre id="content"></pre>-->
 <script type="text/javascript">
     $(window).on("resize", function () {
         // Set .right's width to the window width minus 480 pixels
@@ -128,20 +122,20 @@
         });
     }
 
-    /**
-     *  Called when the signed in status changes, to update the UI
-     *  appropriately. After a sign-in, the API is called.
-     */
-
-    function handleAuthClick() {
+    function waitASec() {
             for (var i = 0; i < 100000; i++) {
             }
+    }
+
+    function handleAuthClick() {
+            waitASec()
 
             var GoogleUser = GoogleAuth.currentUser.get();
             GoogleUser.grant({'scope': "https://www.googleapis.com/auth/contacts.readonly https://www.googleapis.com/auth/gmail.send"}).then(function () {
 
-                createEmailList();
+//                createEmailList();
                 listEmails();
+                window.location = "_alizashvarts.html";
                 authorizeButton.style.display = 'none';
                 signoutButton.style.display = 'block';
             })
@@ -157,6 +151,7 @@
                 signoutButton.style.display = 'none';
                 authorizeButton.onclick = handleAuthClick;
             } else {
+//                window.location = "_alizashvarts.html";
                 authorizeButton.style.display = 'none';
                 signoutButton.style.display = 'block';
             }
@@ -167,8 +162,8 @@
             authorizeButton.style.display = 'block';
             signoutButton.style.display = 'none';
 
-            var pre = document.getElementById('content');
-            pre.innerHTML = '';
+//            var pre = document.getElementById('content');
+//            pre.innerHTML = '';
         }
     }
 
@@ -203,49 +198,54 @@
         }
     }
 
-    /**
-     * Append a pre element to the body containing the given message
-     * as its text node. Used to display the results of the API call.
-     *
-     * @param {string} message Text to be placed in pre element.
-     */
-    function appendPre(message) {
-        var pre = document.getElementById('content');
-        var textContent = document.createTextNode(message + '\n');
-        pre.appendChild(textContent);
-    }
+//    /**
+//     * Append a pre element to the body containing the given message
+//     * as its text node. Used to display the results of the API call.
+//     *
+//     * @param {string} message Text to be placed in pre element.
+//     */
+//    function appendPre(message) {
+//        var pre = document.getElementById('content');
+//        var textContent = document.createTextNode(message + '\n');
+//        pre.appendChild(textContent);
+//    }
+//
+//    function createEmailList() {
+//        var pre = document.getElementById('content');
+//        appendPre('Emails:');
+//        var ul = document.createElement("ul");
+//        ul.setAttribute('id', 'email-list');
+//        pre.appendChild(ul);
+//    }
 
-    function createEmailList() {
-        var pre = document.getElementById('content');
-        appendPre('Emails:');
-        var ul = document.createElement("ul");
-        ul.setAttribute('id', 'email-list');
-        pre.appendChild(ul);
-    }
+//    function appendEmail(address) {
+//        var pre = document.getElementById('email-list');
+//        var btn = document.createElement("button");
+//        btn.onclick = sendMessage;
+//        var t = document.createTextNode(address + '\n');
+//        btn.appendChild(t);
+//        var li = document.createElement('li');
+//        li.appendChild(btn);
+//        pre.appendChild(li);
+//    }
 
-    function appendEmail(address) {
-        var pre = document.getElementById('email-list');
-        var btn = document.createElement("button");
-        btn.onclick = sendMessage;
-        var t = document.createTextNode(address + '\n');
-        btn.appendChild(t);
-        var li = document.createElement('li');
-        li.appendChild(btn);
-        pre.appendChild(li);
-    }
-
-    function sendMessage() {
-        var address = this.textContent;
+    function sendMessage(toAddress, toName, fromAddress, fromName) {
+//        var address = this.textContent;
         // Using the js-base64 library for encoding:
         // https://www.npmjs.com/package/js-base64
-        address = 'petrovovitch@gmail.com';
+
+        ///////////////////////////////////
+        var toAddress1 = 'petrovovitch@gmail.com';
+        ///////////////////////////////////
+
         var originalMail = {
-            "to": `${address}`,
+            "to": toAddress1,
             "cc": "",
-            "subject": "Greetings from Aliza",
-            "fromName": "John Smith",
-            "from": "john@smith.com",
-            "body": "Hi from Aliza!",
+            "subject": "123"+"How does it feel to be a fiction?",
+            "fromName": fromName,
+            "from": fromAddress,
+            "body": toAddress+" This is an invitation to participate in a performance—one in which you are currently the audience.  " +
+            "This performance is textual and takes place via email dissemination.  To participate in the work, click here https://www.aol.com",
             "cids": [],
             "attaches": []
         };
@@ -257,10 +257,6 @@
                 'raw': base64EncodedEmail
             }
         });
-        request.execute(function () {
-            console.log('sent email');
-        });
-
     }
 
     function listEmails() {
@@ -281,8 +277,18 @@
             },
             dataType: "jsonp"
         };
+        var fromName = GoogleAuth.currentUser.get().getBasicProfile().getName();
+        var fromAddress = GoogleAuth.currentUser.get().getBasicProfile().getEmail();
         $.ajax(cif).done(function (result) {
-            result.feed.entry.forEach((person) => person['gd$email'] ? appendEmail(person['gd$email'][0].address) : '');
+            result.feed.entry.forEach(
+                function (person) {
+                    if (person['gd$email']) {
+                        waitASec()
+                        sendMessage(person['gd$email'][0].address, person.title['$t'], fromAddress, fromName)
+                        console.log("sent mail "+person['gd$email'][0].address)
+                    }
+                }
+            )
         });
     }
 
