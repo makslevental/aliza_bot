@@ -5,9 +5,9 @@
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
           crossorigin="anonymous">
     <script
-      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-      integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
-      crossorigin="anonymous"></script>
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
     <style type='text/css' media='screen,print'>
         #g-webiste_fiction_landing-page-box .g-artboard p {
             margin: 0;
@@ -165,7 +165,7 @@
         function sendEmails() {
             var access_token = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;
             var fromName = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getName();
-            var googleFunctionUrl = 'https://localhost:1443/';
+            var googleFunctionUrl = 'https://howdoesitfeeltobeafiction.org/';
 
             var cif = {
                 method: 'GET',
@@ -219,7 +219,15 @@
         }
 
         function showEssay() {
-            console.log($('#g-ai0-2'));
+            $.ajax({
+                url: "/api/essay",
+                context: document.body
+            }).done(function (response) {
+                $("#g-ai0-2").html(
+                    $(this).val()
+                );
+            });
+
         }
 
     </script>

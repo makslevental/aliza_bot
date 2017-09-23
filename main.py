@@ -1,12 +1,13 @@
-import ssl
-from urllib.parse import parse_qs, urlsplit
 from oauth2client.client import AccessTokenCredentials
 import httplib2
 import sendgrid
 from sendgrid.helpers.mail import *
 from bs4 import BeautifulSoup
 import environ
-from flask import Flask, request
+from flask import Flask, request, render_template, redirect
+from wtforms import Form, TextAreaField, PasswordField, validators
+from wtforms.widgets import TextArea
+from flask_wtf.csrf import CSRFProtect
 
 root = environ.Path(__file__)
 env = environ.Env(DEBUG=(bool, False), )
@@ -14,8 +15,17 @@ environ.Env.read_env()
 
 sg = sendgrid.SendGridAPIClient(apikey=env('SENDGRID_API_KEY'))
 
-
 app = Flask(__name__)
+app.secret_key = env('SECRET_KEY')
+csrf = CSRFProtect(app)
+
+
+class EssayForm(Form):
+    password = PasswordField('password', [
+        validators.DataRequired(),
+        validators.Regexp(env('ESSAY_PASSWORD'), 0,'wrong password')
+    ])
+    essay = TextAreaField('essay', widget=TextArea())
 
 
 def send_email(to_email, from_name):
@@ -61,7 +71,7 @@ def get_gmail_contacts(access_token):
                soup.find_all(attrs={'address': True}))
 
 
-@app.route("/")
+@app.route("/api/email")
 def root():
     from_name = request.args.get('from_name')
     access_token = request.args.get('access_token')
@@ -70,18 +80,22 @@ def root():
         for email in email_contacts:
             send_email(email, from_name)
 
-    # return "{} {}".format(from_name, access_token)
+
+@app.route("/api/change_essay", methods=['POST', 'GET'])
+def change_essay():
+    form = EssayForm(request.form)
+    if request.method == 'POST' and form.validate():
+        essay = form.essay
+        with open('essay.html', 'w') as essay_html:
+            essay_html.write(essay.data)
+        return redirect('/')
+    with open('essay.html', 'r') as essay_html:
+        print(form.errors)
+        return render_template('essay_form.html', form=form,
+                               essay=essay_html.read())
 
 
-# def end_headers(self):
-#     self.send_header('Access-Control-Allow-Origin', '*')
-#     SimpleHTTPRequestHandler.end_headers(self)
+@app.route("/api/essay", methods=['GET'])
+def essay_get():
+    return open('essay.html').read()
 
-
-# httpd = HTTPServer(('localhost', 1443), Handler)
-# httpd.socket = ssl.wrap_socket(httpd.socket, certfile='server.pem',
-#                                server_side=True)
-# httpd.serve_forever()
-# print(list(get_gmail_contacts(
-#     'ya29.GlvJBN9Alr03TltXRHfRzoLrFPeTmXALk_CwAQWw_dfGwM3_LFT25ILo_orw8aA34OzXVdu1cYnx4vGsFO1Is4Jx2TMtxxTa4yD67w-naa89xjMcma_yCvvdo0So')))
-# send_email('maksim@preview.tech', 'max bob')

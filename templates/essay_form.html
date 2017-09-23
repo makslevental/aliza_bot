@@ -1,0 +1,131 @@
+<html>
+<style>
+    #essay {
+        width: 900px;
+        height: 390px;
+        border: 1px solid #999999;
+        padding: 5px;
+    }
+
+    #g-webiste_fiction_landing-page-box .g-artboard p {
+        margin: 0;
+    }
+
+    .g-aiPointText p {
+        white-space: nowrap;
+    }
+
+    .button {
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        color: #000000;
+        background-color: #ffffff;
+        border-color: #000000;
+        border-radius: 0 !important;
+    }
+
+    #g-webiste_fiction_landing-page-Artboard_1 {
+        width: 839.984px;
+        margin: 0 auto;
+        margin-top: 10%;
+    }
+
+    #g-webiste_fiction_landing-page-Artboard_1 p {
+        font-family: arial, helvetica, sans-serif;
+        font-size: 16px;
+        line-height: 19px;
+        filter: alpha(opacity=100);
+        -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+        opacity: 1;
+        letter-spacing: 0em;
+        text-align: left;
+        color: rgb(0, 0, 0);
+        text-transform: none;
+        padding-bottom: 0;
+        padding-top: 0;
+        mix-blend-mode: normal;
+        font-style: normal;
+    }
+
+    #g-webiste_fiction_landing-page-Artboard_1 .g-pstyle0 {
+        -webkit-text-stroke-width: 1px;
+        -webkit-text-stroke-color: black;
+        font-size: 60px;
+        line-height: 72px;
+        color: rgb(252, 252, 252);
+    }
+
+    #g-webiste_fiction_landing-page-Artboard_1 .g-pstyle1 {
+        font-size: 18px;
+        line-height: 22px;
+    }
+</style>
+<script
+        src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+        crossorigin="anonymous"></script>
+<script>
+    window.onload = function () {
+
+            $("#essay")[0].oninput = function () {
+                $("#g-ai0-2").html(
+                    $(this).val()
+                );
+            };
+        };
+</script>
+<body>
+<form method=post id="essayform">
+    <dl>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <dt>{{ form.essay.label }}
+        <dd>{{ form.essay|safe }}
+        </dd>
+        <dt>{{ form.password.label }}
+        <dd>{{ form.password|safe }}
+        </dd>
+        {% if form.errors %}
+        <span style="color: red; ">Errors</span>
+        <ul class=errors>
+            {% for field, error in form.errors.items() %}
+            <li>{{ field }}: {{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </dl>
+    <p><input type=submit value=Change>
+</form>
+<hr size=2>
+<div id="g-webiste_fiction_landing-page-box" class="ai2html">
+
+    <!-- Artboard: Artboard_1 -->
+    <div id="g-webiste_fiction_landing-page-Artboard_1"
+         class="g-artboard g-artboard-v3" data-min-width='1366'>
+        <div id="g-ai0-1" class="g-Layer_1 g-aiAbs"
+             style="top:13.5417%;left:19.3997%">
+            <p class="g-pstyle0">How does it feel to be a fiction?</p>
+        </div>
+        <div id="g-ai0-2" class="g-Layer_1 g-aiAbs"
+             style="top:24.4792%;left:19.3997%">
+            {{ essay|safe }}
+        </div>
+        <div style="margin: 0 auto;">
+            <button type="button"
+                    class="btn btn-secondary btn-lg center-block button"
+                    id="authorize-button" style="display: none">
+                AUTHORIZE
+            </button>
+            <button type="button"
+                    class="btn btn-secondary btn-lg center-block button"
+                    id="signout-button" style="display: none">
+                SIGN OUT
+            </button>
+        </div>
+
+    </div>
+</div>
+
+</body>
+
+</html>
