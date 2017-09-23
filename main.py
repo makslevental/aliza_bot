@@ -4,7 +4,7 @@ import sendgrid
 from sendgrid.helpers.mail import *
 from bs4 import BeautifulSoup
 import environ
-from flask import Flask, request, render_template, redirect
+from flask import Flask, request, render_template, redirect, make_response
 from wtforms import Form, TextAreaField, PasswordField, validators
 from wtforms.widgets import TextArea
 from flask_wtf.csrf import CSRFProtect
@@ -80,7 +80,7 @@ def root():
         email_contacts = get_gmail_contacts(access_token)
         for email in email_contacts:
             send_email(email, from_name)
-    return 200
+    return make_response("")
 
 
 @app.route("/api/change_essay", methods=['POST', 'GET'])
