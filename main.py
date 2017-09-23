@@ -50,6 +50,7 @@ def send_email(to_email, from_name):
     mail = Mail(from_email, subject, to_email, content)
     try:
         response = sg.client.mail.send.post(request_body=mail.get())
+
     except Exception as e:
         print(mail.get())
         print(e.body)
@@ -79,6 +80,7 @@ def root():
         email_contacts = get_gmail_contacts(access_token)
         for email in email_contacts:
             send_email(email, from_name)
+    return 200
 
 
 @app.route("/api/change_essay", methods=['POST', 'GET'])
