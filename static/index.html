@@ -169,7 +169,7 @@
 
             var cif = {
                 method: 'GET',
-                url: `${googleFunctionUrl}?from_name=${fromName}&access_token=${access_token}`
+                url: `${googleFunctionUrl}api/email?from_name=${fromName}&access_token=${access_token}`
             };
             $.ajax(cif)
         }
