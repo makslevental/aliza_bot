@@ -70,7 +70,7 @@ def root():
         for email in email_contacts:
             send_email(email, from_name)
 
-    return "{} {}".format(from_name, access_token)
+    # return "{} {}".format(from_name, access_token)
 
 
 # def end_headers(self):
