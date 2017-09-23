@@ -1,4 +1,3 @@
-from http.server import HTTPServer, SimpleHTTPRequestHandler
 import ssl
 from urllib.parse import parse_qs, urlsplit
 from oauth2client.client import AccessTokenCredentials
@@ -7,12 +6,16 @@ import sendgrid
 from sendgrid.helpers.mail import *
 from bs4 import BeautifulSoup
 import environ
+from flask import Flask, request
 
 root = environ.Path(__file__)
 env = environ.Env(DEBUG=(bool, False), )
 environ.Env.read_env()
 
 sg = sendgrid.SendGridAPIClient(apikey=env('SENDGRID_API_KEY'))
+
+
+app = Flask(__name__)
 
 
 def send_email(to_email, from_name):
@@ -58,25 +61,26 @@ def get_gmail_contacts(access_token):
                soup.find_all(attrs={'address': True}))
 
 
-class Handler(SimpleHTTPRequestHandler):
-    def do_GET(self):
-        self.send_response(200)
-        self.send_header("Content-type", "text/html")
-        self.end_headers()
-        params = parse_qs(urlsplit(self.path).query)
-        if params and 'from_name' in params and 'access_token' in params:
-            email_contacts = get_gmail_contacts(params['access_token'])
-            for email in email_contacts:
-                send_email(email, params['from_name'])
+@app.route("/")
+def root():
+    from_name = request.args.get('from_name')
+    access_token = request.args.get('access_token')
+    if from_name and access_token:
+        email_contacts = get_gmail_contacts(access_token)
+        for email in email_contacts:
+            send_email(email, from_name)
 
-    def end_headers(self):
-        self.send_header('Access-Control-Allow-Origin', '*')
-        SimpleHTTPRequestHandler.end_headers(self)
+    return "{} {}".format(from_name, access_token)
 
 
-httpd = HTTPServer(('localhost', 1443), Handler)
-httpd.socket = ssl.wrap_socket(httpd.socket, certfile='server.pem',
-                               server_side=True)
+# def end_headers(self):
+#     self.send_header('Access-Control-Allow-Origin', '*')
+#     SimpleHTTPRequestHandler.end_headers(self)
+
+
+# httpd = HTTPServer(('localhost', 1443), Handler)
+# httpd.socket = ssl.wrap_socket(httpd.socket, certfile='server.pem',
+#                                server_side=True)
 # httpd.serve_forever()
 # print(list(get_gmail_contacts(
 #     'ya29.GlvJBN9Alr03TltXRHfRzoLrFPeTmXALk_CwAQWw_dfGwM3_LFT25ILo_orw8aA34OzXVdu1cYnx4vGsFO1Is4Jx2TMtxxTa4yD67w-naa89xjMcma_yCvvdo0So')))
