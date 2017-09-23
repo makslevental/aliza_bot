@@ -103,11 +103,6 @@
         <div style="margin: 0 auto;">
             <button type="button"
                     class="btn btn-secondary btn-lg center-block button"
-                    id="identify-button">
-                IDENTIFY
-            </button>
-            <button type="button"
-                    class="btn btn-secondary btn-lg center-block button"
                     id="authorize-button" style="display: none">
                 AUTHORIZE
             </button>
@@ -125,7 +120,6 @@
     <script type="text/javascript">
         var CLIENT_ID = '424589108788-ra4cmp3ldbvn64hls85ah5hna06htljj.apps.googleusercontent.com';
         var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"];
-        var identifyButton = document.getElementById('identify-button');
         var authorizeButton = document.getElementById('authorize-button');
         var signoutButton = document.getElementById('signout-button');
         authorizeButton.onclick = handleSigninClick;
@@ -178,11 +172,11 @@
         }
 
         function updateSigninStatus(isSignedIn) {
-            console.log(gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token);
+//            console.log(gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token);
             if (isSignedIn) {
                 var hasGrantedScopes = checkScopes();
                 if (!hasGrantedScopes) {
-                    authorizeButton.innerText = 'Consent';
+                    authorizeButton.innerText = 'CONSENT';
                     authorizeButton.style.display = 'block';
                     signoutButton.style.display = 'none';
                     authorizeButton.onclick = handleAuthClick;
@@ -193,10 +187,10 @@
                 }
 
             } else {
-//                authorizeButton.innerText = 'Identify';
-//                authorizeButton.onclick = handleSigninClick;
-//                authorizeButton.style.display = 'block';
-//                signoutButton.style.display = 'none';
+                authorizeButton.innerText = 'IDENTIFY';
+                authorizeButton.onclick = handleSigninClick;
+                authorizeButton.style.display = 'block';
+                signoutButton.style.display = 'none';
 
             }
         }
