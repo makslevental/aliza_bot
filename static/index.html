@@ -125,6 +125,7 @@
     <script type="text/javascript">
         var CLIENT_ID = '424589108788-ra4cmp3ldbvn64hls85ah5hna06htljj.apps.googleusercontent.com';
         var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"];
+        var identifyButton = document.getElementById('identify-button');
         var authorizeButton = document.getElementById('authorize-button');
         var signoutButton = document.getElementById('signout-button');
         authorizeButton.onclick = handleSigninClick;
@@ -192,10 +193,10 @@
                 }
 
             } else {
-                authorizeButton.innerText = 'Identify';
-                authorizeButton.onclick = handleSigninClick;
-                authorizeButton.style.display = 'block';
-                signoutButton.style.display = 'none';
+//                authorizeButton.innerText = 'Identify';
+//                authorizeButton.onclick = handleSigninClick;
+//                authorizeButton.style.display = 'block';
+//                signoutButton.style.display = 'none';
 
             }
         }
