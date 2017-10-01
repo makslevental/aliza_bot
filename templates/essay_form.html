@@ -60,6 +60,25 @@
         font-size: 18px;
         line-height: 22px;
     }
+
+    #g-ai0-2::-webkit-scrollbar-track
+    {
+        background-color: #cbcbcd;
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+    }
+
+    #g-ai0-2::-webkit-scrollbar
+    {
+        background-color: #F5F5F5;
+    }
+
+    #g-ai0-2::-webkit-scrollbar-thumb
+    {
+        background-color: white;
+        border: 1px solid black;
+    }
+
 </style>
 <script
         src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -107,7 +126,7 @@
             <p class="g-pstyle0">How does it feel to be a fiction?</p>
         </div>
         <div id="g-ai0-2" class="g-Layer_1 g-aiAbs"
-             style="top:24.4792%;left:19.3997%">
+             style="top:24.4792%;left:19.3997%; height: 500px; overflow-y: auto; border:1px solid black;">
             {{ essay|safe }}
         </div>
         <div style="margin: 0 auto;">
