@@ -48,9 +48,10 @@ def send_email(to_email, from_name):
     of the 
     performance.''')
     mail = Mail(from_email, subject, to_email, content)
+    if env('DEBUG'):
+        print(mail)
     try:
         response = sg.client.mail.send.post(request_body=mail.get())
-
     except Exception as e:
         print(mail.get())
         print(e.body)
@@ -72,7 +73,7 @@ def get_gmail_contacts(access_token):
                soup.find_all(attrs={'address': True}))
 
 
-@app.route("/api/email")
+@app.route("/api/email", methods=['GET'])
 def root():
     from_name = request.args.get('from_name')
     access_token = request.args.get('access_token')

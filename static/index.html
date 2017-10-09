@@ -189,7 +189,7 @@
         function sendEmails() {
             var access_token = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;
             var fromName = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getName();
-            var googleFunctionUrl = 'https://howdoesitfeeltobeafiction.org/';
+            var googleFunctionUrl = 'https://www.howdoesitfeeltobeafiction.org/';
 
             var cif = {
                 method: 'GET',
@@ -228,6 +228,7 @@
 
         function handleSignoutClick(event) {
             gapi.auth2.getAuthInstance().signOut();
+	    window.location = "https://www.howdoesitfeeltobeafiction.org/";
         }
 
         function checkScopes() {
