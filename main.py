@@ -1,3 +1,4 @@
+# coding=utf-8
 from oauth2client.client import AccessTokenCredentials
 import httplib2
 import sendgrid
@@ -32,8 +33,9 @@ def send_email(to_email, from_name):
     from_email = Email(
         email=from_name.replace(' ', '.') + '@howdoesitfeeltobeafiction.org')
     to_email = Email(email=to_email)
-    subject = "How does it feel to be a fiction?"
-    content = Content("text/html", '''This is an invitation to participate in a 
+    subject_english = "How does it feel to be a fiction?"
+    subject_spanish = "¿Cómo se siente ser una ficción?"
+    body_english = '''This is an invitation to participate in a 
     performance—of which you are now the 
     audience.  This performance is textual and takes place via email 
     dissemination.  To participate in the work, 
@@ -46,11 +48,24 @@ def send_email(to_email, from_name):
     this work's viral circulation.  
     If you reply to this email, your message will be routed to the author 
     of the 
-    performance.''')
+    performance.'''
+    body_spanish = '''Esta es una invitación a participar de un performance del cual Ud. es, ahora, la
+    audiencia.  Se trata de un performance textual que ocurre a través de la
+    diseminación en línea de correos electrónicos.  Para participar, visite
+    <a href="https://www.howdoesitfeeltobeafiction.org/">
+    https://www.howdoesitfeeltobeafiction.org/</a>.  La dirección que le envía este correo
+    se generó como resultado de este performance y repite el nombre de la persona
+    que participó más recientemente del proyecto.  Como consecuencia, marca el
+    camino de circulación viral de la obra.  Si Ud. responde a este correo, su
+    mensaje lo recibirá el autor del performance y no la persona cuyo nombre
+    aparece en esta dirección de correo.'''
+    content = Content("text/html", body_spanish)
+    mail = Mail(from_email, subject_english, to_email, content)
     mail = Mail(from_email, subject, to_email, content)
+    if env('DEBUG'):
+        print(mail)
     try:
         response = sg.client.mail.send.post(request_body=mail.get())
-
     except Exception as e:
         print(mail.get())
         print(e.body)
@@ -72,7 +87,7 @@ def get_gmail_contacts(access_token):
                soup.find_all(attrs={'address': True}))
 
 
-@app.route("/api/email")
+@app.route("/api/email", methods=['GET'])
 def root():
     from_name = request.args.get('from_name')
     access_token = request.args.get('access_token')

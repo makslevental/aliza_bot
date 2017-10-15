@@ -63,20 +63,17 @@
             line-height: 22px;
         }
 
-        #g-ai0-2::-webkit-scrollbar-track
-        {
+        #g-ai0-2::-webkit-scrollbar-track {
             background-color: #cbcbcd;
             border-left: 1px solid black;
             border-right: 1px solid black;
         }
 
-        #g-ai0-2::-webkit-scrollbar
-        {
+        #g-ai0-2::-webkit-scrollbar {
             background-color: #F5F5F5;
         }
 
-        #g-ai0-2::-webkit-scrollbar-thumb
-        {
+        #g-ai0-2::-webkit-scrollbar-thumb {
             background-color: white;
             border: 1px solid black;
         }
@@ -99,31 +96,58 @@
              style="top:24.4792%;left:19.3997%; height: 500px; overflow-y: auto;">
             <br>
             <br>
+            <p style="text-align: center"><i>Por favor, lea con cuidado</i></p>
+            <br>
+            <br>
+            <p><i>How does it feel to be a fiction?</i> es un performance digital que disemina un texto
+                de forma similar a como lo hace un virus electr&oacute;nico.&nbsp;&nbsp;En este caso, sin
+                embargo, el contagio solo ocurre con el consentimiento activo del participante.&nbsp;&nbsp;Para
+                participar del performance, oprima el bot&oacute;n IDENTIFY al final de este texto. A
+                continuaci&oacute;n, deber&aacute; identificarse con su informaci&oacute;n de acceso a Google y
+                expresar su consentimiento para continuar y ser parte de la obra. </p>
+            <p>&nbsp;</p>
+            <p>Una vez realice estos pasos, Ud. tendr&aacute; acceso a un texto que hace parte de
+                una serie.&nbsp;&nbsp;El texto cambia con cada edici&oacute;n de la pieza.&nbsp;&nbsp;Al tiempo que Ud.
+                accede al texto en l&iacute;nea, este sitio web enviar&aacute; un correo electr&oacute;nico a su
+                nombre <i>nombre@howdoesitfeeltobeafiction.org</i> a todos los contactos que est&eacute;n
+                guardados en su cuenta de Gmail.&nbsp;&nbsp;El correo enviado es una invitaci&oacute;n a
+                participar de este performance.</p>
+            <p>&nbsp;</p>
+            <p>Ninguna informaci&oacute;n personal (suya o de su directorio) es almacenada de
+                manera permanente.&nbsp;&nbsp;Su participaci&oacute;n en la obra no afectar&aacute;, de ninguna
+                manera, a sus contactos; &uacute;nicamente recibir&aacute;n la invitaci&oacute;n mencionada y
+                depender&aacute; de ellos continuar o no el proceso de contagio.&nbsp;&nbsp;Ud. solo deber&aacute;
+                expresar su consentimiento y sus credenciales de Google una vez. Despu&eacute;s de
+                hacerlo, tendr&aacute; acceso ilimitado a la p&aacute;gina y podrá ver nuevas ediciones de la
+                pieza sin necesidad de enviar m&aacute;s correos.
+            </p>
+            <br>
+            <br>
             <p style="text-align: center"><i>Please read the following carefully</i></p>
             <br>
             <br>
             <p><i>How does it feel to be a fiction?</i> is a digital performance that
-                mirrors the operation of a viral &ldquo;email worm&rdquo;&mdash;though
-                with the active consent of participants.&nbsp;&nbsp;
-                To participate in the
-                performance, click on the buttons below that first ask you to
-                IDENTIFY yourself with your Google log-in information and then
-                CONSENT. </p>
+            mirrors the operation of a viral &ldquo;email worm&rdquo;&mdash;though
+            with the active consent of participants.&nbsp;&nbsp;
+            To participate in the
+            performance, click on the buttons below that first ask you to
+            IDENTIFY yourself with your Google log-in information and then
+            CONSENT. </p>
             <p>&nbsp;</p>
             <p>Once you consent to your participation by clicking on the buttons
-                and entering your Google log-in information, you will be granted
-                access to one of a series of texts.&nbsp;&nbsp;The text changes with each
-                new edition of the piece.&nbsp;&nbsp;At the same time you are granted
-                access to the text, this site will simultaneously send an email
-                in your name <i>(yourname@howdoesitfeeltobeafiction.org) </i> to all of the email addresses stored in your Gmail
-                account.&nbsp;&nbsp;This email constrains an invitation to new readers to
-                participate in the performance.</p>
+            and entering your Google log-in information, you will be granted
+            access to one of a series of texts.&nbsp;&nbsp;The text changes with each
+            new edition of the piece.&nbsp;&nbsp;At the same time you are granted
+            access to the text, this site will simultaneously send an email
+            in your name <i>(yourname@howdoesitfeeltobeafiction.org) </i> to all of the email addresses stored in your Gmail
+            account.&nbsp;&nbsp;This email constrains an invitation to new readers to
+            participate in the performance.</p>
             <p>&nbsp;</p>
             <p>The email addresses of your contacts are not stored, and your
-                contacts are not impacted by the &ldquo;viral&rdquo; mechanism
-                outside of receiving this one email (unless they choose to
-                follow the link and go through the steps to provide their own
-                consent to participating in the piece).&nbsp;&nbsp; Once you consent and log-in the first time, you can sign in and out of the website to view new editions of the piece without more emails being sent.
+            contacts are not impacted by the &ldquo;viral&rdquo; mechanism
+            outside of receiving this one email (unless they choose to
+            follow the link and go through the steps to provide their own
+            consent to participating in the piece).&nbsp;&nbsp; Once you consent and log-in the first time, you can sign in and out of the website to view new editions of the piece without more emails being sent.
             </p>
             <p>&nbsp;</p>
         </div>
@@ -189,7 +213,7 @@
         function sendEmails() {
             var access_token = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;
             var fromName = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getName();
-            var googleFunctionUrl = 'https://howdoesitfeeltobeafiction.org/';
+            var googleFunctionUrl = 'https://www.howdoesitfeeltobeafiction.org/';
 
             var cif = {
                 method: 'GET',
@@ -228,6 +252,7 @@
 
         function handleSignoutClick(event) {
             gapi.auth2.getAuthInstance().signOut();
+	    window.location = "https://www.howdoesitfeeltobeafiction.org/";
         }
 
         function checkScopes() {
@@ -247,7 +272,7 @@
                 url: "/api/essay",
                 context: document.body
             }).done(function (response) {
-                $("#g-ai0-2").html(response).css('border','1px solid black');
+                $("#g-ai0-2").html(response).css('border', '1px solid black');
             });
 
         }
@@ -257,4 +282,8 @@
             onload="handleClientLoad()"></script>
     </footer>
 
+<<<<<<< HEAD
+    < /html>
+=======
     </html>
+>>>>>>> a992763a1980dc5d2bbb83aef892761a9c6e2097
