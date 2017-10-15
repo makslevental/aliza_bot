@@ -34,7 +34,7 @@ def send_email(to_email, from_name):
         email=from_name.replace(' ', '.') + '@howdoesitfeeltobeafiction.org')
     to_email = Email(email=to_email)
     subject_english = "How does it feel to be a fiction?"
-    subject_spanish = "¿Cómo se siente ser una ficción?"
+    # subject_spanish = "¿Cómo se siente ser una ficción?"
     body_english = '''This is an invitation to participate in a 
     performance—of which you are now the 
     audience.  This performance is textual and takes place via email 
@@ -59,9 +59,8 @@ def send_email(to_email, from_name):
     camino de circulación viral de la obra.  Si Ud. responde a este correo, su
     mensaje lo recibirá el autor del performance y no la persona cuyo nombre
     aparece en esta dirección de correo.'''
-    content = Content("text/html", body_spanish)
+    content = Content("text/html", body_english+"\n\n"+body_spanish)
     mail = Mail(from_email, subject_english, to_email, content)
-    mail = Mail(from_email, subject, to_email, content)
     if env('DEBUG'):
         print(mail)
     try:
