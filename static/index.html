@@ -63,17 +63,20 @@
             line-height: 22px;
         }
 
-        #g-ai0-2::-webkit-scrollbar-track {
+        #g-ai0-2::-webkit-scrollbar-track
+        {
             background-color: #cbcbcd;
             border-left: 1px solid black;
             border-right: 1px solid black;
         }
 
-        #g-ai0-2::-webkit-scrollbar {
+        #g-ai0-2::-webkit-scrollbar
+        {
             background-color: #F5F5F5;
         }
 
-        #g-ai0-2::-webkit-scrollbar-thumb {
+        #g-ai0-2::-webkit-scrollbar-thumb
+        {
             background-color: white;
             border: 1px solid black;
         }
@@ -127,27 +130,27 @@
             <br>
             <br>
             <p><i>How does it feel to be a fiction?</i> is a digital performance that
-            mirrors the operation of a viral &ldquo;email worm&rdquo;&mdash;though
-            with the active consent of participants.&nbsp;&nbsp;
-            To participate in the
-            performance, click on the buttons below that first ask you to
-            IDENTIFY yourself with your Google log-in information and then
-            CONSENT. </p>
+                mirrors the operation of a viral &ldquo;email worm&rdquo;&mdash;though
+                with the active consent of participants.&nbsp;&nbsp;
+                To participate in the
+                performance, click on the buttons below that first ask you to
+                IDENTIFY yourself with your Google log-in information and then
+                CONSENT. </p>
             <p>&nbsp;</p>
             <p>Once you consent to your participation by clicking on the buttons
-            and entering your Google log-in information, you will be granted
-            access to one of a series of texts.&nbsp;&nbsp;The text changes with each
-            new edition of the piece.&nbsp;&nbsp;At the same time you are granted
-            access to the text, this site will simultaneously send an email
-            in your name <i>(yourname@howdoesitfeeltobeafiction.org) </i> to all of the email addresses stored in your Gmail
-            account.&nbsp;&nbsp;This email constrains an invitation to new readers to
-            participate in the performance.</p>
+                and entering your Google log-in information, you will be granted
+                access to one of a series of texts.&nbsp;&nbsp;The text changes with each
+                new edition of the piece.&nbsp;&nbsp;At the same time you are granted
+                access to the text, this site will simultaneously send an email
+                in your name <i>(yourname@howdoesitfeeltobeafiction.org) </i> to all of the email addresses stored in your Gmail
+                account.&nbsp;&nbsp;This email constrains an invitation to new readers to
+                participate in the performance.</p>
             <p>&nbsp;</p>
             <p>The email addresses of your contacts are not stored, and your
-            contacts are not impacted by the &ldquo;viral&rdquo; mechanism
-            outside of receiving this one email (unless they choose to
-            follow the link and go through the steps to provide their own
-            consent to participating in the piece).&nbsp;&nbsp; Once you consent and log-in the first time, you can sign in and out of the website to view new editions of the piece without more emails being sent.
+                contacts are not impacted by the &ldquo;viral&rdquo; mechanism
+                outside of receiving this one email (unless they choose to
+                follow the link and go through the steps to provide their own
+                consent to participating in the piece).&nbsp;&nbsp; Once you consent and log-in the first time, you can sign in and out of the website to view new editions of the piece without more emails being sent.
             </p>
             <p>&nbsp;</p>
         </div>
@@ -252,7 +255,6 @@
 
         function handleSignoutClick(event) {
             gapi.auth2.getAuthInstance().signOut();
-	    window.location = "https://www.howdoesitfeeltobeafiction.org/";
         }
 
         function checkScopes() {
@@ -272,7 +274,7 @@
                 url: "/api/essay",
                 context: document.body
             }).done(function (response) {
-                $("#g-ai0-2").html(response).css('border', '1px solid black');
+                $("#g-ai0-2").html(response).css('border','1px solid black');
             });
 
         }
@@ -282,8 +284,4 @@
             onload="handleClientLoad()"></script>
     </footer>
 
-<<<<<<< HEAD
-    < /html>
-=======
     </html>
->>>>>>> a992763a1980dc5d2bbb83aef892761a9c6e2097
