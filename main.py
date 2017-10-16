@@ -29,6 +29,7 @@ class EssayForm(Form):
     essay = TextAreaField('essay', widget=TextArea())
 
 
+
 def send_email(to_email, from_name):
     from_email = Email(
         email=from_name.replace(' ', '.') + '@howdoesitfeeltobeafiction.org')
@@ -106,9 +107,10 @@ def change_essay():
             essay_html.write(essay.data)
         return redirect('/')
     with open('essay.html', 'r') as essay_html:
-        print(form.errors)
+        essay = essay_html.read()
+        form.essay.data = essay
         return render_template('essay_form.html', form=form,
-                               essay=essay_html.read())
+                               essay=essay)
 
 
 @app.route("/api/essay", methods=['GET'])
