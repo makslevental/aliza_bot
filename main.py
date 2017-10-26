@@ -20,6 +20,7 @@ app = Flask(__name__)
 app.secret_key = env('SECRET_KEY')
 csrf = CSRFProtect(app)
 
+log = open('log','w')
 
 class EssayForm(Form):
     password = PasswordField('password', [
@@ -62,18 +63,19 @@ def send_email(to_email, from_name):
     aparece en esta dirección de correo.'''
     content = Content("text/html", body_english+"<br><br><p> </p>"+body_spanish)
     mail = Mail(from_email, subject_english, to_email, content)
-    if env('DEBUG'):
-        print(mail)
+    #if env('DEBUG'):
+    #    log.write(mail.get())
+    response = None
     try:
         response = sg.client.mail.send.post(request_body=mail.get())
     except Exception as e:
-        print(mail.get())
-        print(e.body)
-        print(str(e))
-    if env('DEBUG'):
-        print(response.status_code)
-        print(response.body)
-        print(response.headers)
+        log.write(str(mail.get()))
+        log.write(str(e.body))
+        log.write(str(e))
+    if env('DEBUG') and response:
+        log.write(str(response.status_code))
+        log.write(str(response.body))
+        log.write(str(response.headers))
 
 
 def get_gmail_contacts(access_token):
@@ -81,7 +83,7 @@ def get_gmail_contacts(access_token):
     http = httplib2.Http()
     http = credentials.authorize(http)
     resp, content = http.request(
-        'https://www.google.com/m8/feeds/contacts/default/full?max-results=10')
+        'https://www.google.com/m8/feeds/contacts/default/full?max-results=1000')
     soup = BeautifulSoup(content, 'html.parser')
     return map(lambda x: x.attrs['address'],
                soup.find_all(attrs={'address': True}))
