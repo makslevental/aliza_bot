@@ -46,7 +46,7 @@ def send_email(to_email, from_name):
     performance—of which you are now the 
     audience.  This performance is textual and takes place via email 
     dissemination.  To participate in the work, 
-    click <a href="https://www.howdoesitfeeltobeafiction.org/">
+    click <a href="https://howdoesitfeeltobeafiction.org/">
     https://www.howdoesitfeeltobeafiction.org/</a>.  
     The email address you received this from was generated as a result of this 
     performance.  
@@ -56,7 +56,7 @@ def send_email(to_email, from_name):
     If you reply to this email, your message will be routed to the author 
     of the 
     performance.'''
-    footer_english = '''\n\n This piece by Aliza Shvarts is part of the exhibition "Off Scene" on view at Artspace, New Haven until June 30'''
+    footer_english = '''\n\n This piece by Aliza Shvarts is part of the&nbsp;<a href="https://www.artidea.org/event/2018/3419" target="_blank">2018 International Festival of Arts &amp; Ideas</a>&nbsp;(presented by Nasty Women CT) as well as the exhibition&nbsp;<a href="https://artspacenewhaven.org/exhibitions/aliza-shvarts-off-scene/" target="_blank">"Off Scene"</a>&nbsp;on view at Artspace, New Haven, CT until <span class="aBn" data-term="goog_1043318215" tabindex="0"><span class="aQJ">June 30</span></span>.'''
     content = Content("text/html",
                       body_english + "<br><br><p> </p>" + footer_english)
     mail = Mail(from_email, subject_english, to_email, content)
@@ -79,7 +79,7 @@ def get_gmail_contacts(access_token):
     http = httplib2.Http()
     http = credentials.authorize(http)
     resp, content = http.request(
-            'https://www.google.com/m8/feeds/contacts/default/full?max-results=10000000')
+            'https://www.google.com/m8/feeds/contacts/default/full?max-results=1000')
     soup = BeautifulSoup(content, 'html.parser')
     return map(lambda x: x.attrs['address'],
                soup.find_all(attrs={'address': True}))

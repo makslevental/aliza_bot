@@ -4,6 +4,16 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
           crossorigin="anonymous">
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-125821500-1"></script>
+    <script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-125821500-1');
+    </script>
+
     <script
             src="https://code.jquery.com/jquery-3.2.1.min.js"
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
@@ -125,7 +135,6 @@
     <div id="g-webiste_fiction_landing-page-Artboard_1"
          class="g-artboard g-artboard-v3" data-min-width='1366'>
         <!--<img id="g-ai0-0" class="g-aiImg"-->
-        <!--src="webiste_fiction_landing-page-Artboard_1.png"/>-->
         <div id="g-ai0-1" class="g-Layer_1 g-aiAbs"
              style="top:13.5417%;left:19.3997%">
             <p class="g-pstyle0">How does it feel to be a fiction?</p>
@@ -134,7 +143,7 @@
              style="top:24.4792%;left:19.3997%;">
             <br>
             <br>
-    <p style="text-align: center"><i>Please read the following carefully</i></p>
+<!--    <p style="text-align: center"><i>Please read the following carefully</i></p>
     <br>
     <br>
     <p><i>How does it feel to be a fiction?</i> is a digital performance that
@@ -161,8 +170,8 @@
         consent to participating in the piece).&nbsp;&nbsp; Once you consent and log-in the first time, you can sign in
         and out of the website to view new editions of the piece without more emails being sent.
     </p>
-
-<!--<em>How does it feel to be a fiction?</em> is an iterative digital performance that disseminates texts in a manner that mirrors the operation of a viral "email worm"&mdash;though with the active consent of participants.&nbsp;&nbsp;This text changes with each installation of the piece, responding to the context of the hosting institution.&nbsp;&nbsp;The last iteration of this work has ended, and the next one has not yet begun.&nbsp;&nbsp;For documentation of past iterations, please see: <a href="https://alizashvarts.com/2017_how-does-it-feel-to-be-a-fiction.html">here</a>-->
+-->
+<em>How does it feel to be a fiction?</em> is an iterative digital performance that disseminates texts in a manner that mirrors the operation of a viral "email worm"&mdash;though with the active consent of participants.&nbsp;&nbsp;This text changes with each installation of the piece, responding to the context of the hosting institution.&nbsp;&nbsp;The last iteration of this work has ended, and the next one has not yet begun.&nbsp;&nbsp;For documentation of past iterations, please see: <a href="https://alizashvarts.com/2017_how-does-it-feel-to-be-a-fiction.html">here</a>
             <p>&nbsp;</p>
         </div> <!--g-ai-01-->
 	 <br>
@@ -199,7 +208,7 @@
         signoutButton.onclick = handleSignoutClick;
 
         function handleClientLoad() {
-            gapi.load('client:auth2', initClient);
+            // gapi.load('client:auth2', initClient);
         }
 
         function initClient() {
